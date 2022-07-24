@@ -1,0 +1,41 @@
+server:
+  port: 9070
+  max-http-header-size: 756000
+  jetty:
+    threads:
+      min: 100
+      max: 3000
+      idle-timeout: 10000
+    connection-idle-timeout: 10000
+    accesslog:
+      append: true
+
+spring:
+  application:
+    name: multiplication-service
+
+
+service:
+  api:
+    base-path: /services/multiplication
+  openapi:
+    version: 'version1.0.0 1401/05/02'
+    title: 'multiplication-service'
+    description: 'multiplication-service'
+
+springdoc:
+  swagger-ui:
+    display-operation-id: true
+    display-request-duration: true
+    path: /swagger-ui.html
+
+  api-docs:
+    path: /v3/multiplication/api-docs
+
+
+management:
+  endpoints:
+    web:
+      base-path: /actuators/multiplication
+      exposure:
+        include: '*'
