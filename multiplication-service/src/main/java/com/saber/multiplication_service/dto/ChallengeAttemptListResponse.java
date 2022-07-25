@@ -7,28 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "attempts")
-public class ChallengeAttempt {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @JoinColumn(name = "userId")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private UserDto user;
-//    private Integer factorA;
-//    private Integer factorB;
-    @JoinColumn(name = "challengeId")
-    @OneToOne(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
-    private ChallengeDto challenge;
-    private Integer resultAttempt;
-    private boolean correct;
-
+public class ChallengeAttemptListResponse {
+    private List<ChallengeAttempt> challengeAttempts;
     @Override
     public String toString() {
         return new GsonBuilder()
@@ -37,6 +22,6 @@ public class ChallengeAttempt {
                 .enableComplexMapKeySerialization()
                 .setLongSerializationPolicy(LongSerializationPolicy.DEFAULT)
                 .setObjectToNumberStrategy(ToNumberPolicy.BIG_DECIMAL)
-                .create().toJson(this, ChallengeAttempt.class);
+                .create().toJson(this, ChallengeAttemptListResponse.class);
     }
 }

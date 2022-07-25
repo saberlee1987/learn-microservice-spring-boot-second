@@ -2,6 +2,7 @@ package com.saber.multiplication_service;
 
 import com.saber.multiplication_service.dto.ChallengeAttempt;
 import com.saber.multiplication_service.dto.ChallengeAttemptDto;
+import com.saber.multiplication_service.dto.ChallengeDto;
 import com.saber.multiplication_service.dto.UserDto;
 import com.saber.multiplication_service.services.ChallengeService;
 import org.assertj.core.api.BDDAssertions;
@@ -40,10 +41,11 @@ public class ChallengeAttemptControllerTest {
 
     @Test
     void postValidResult() {
-        UserDto userDto = new UserDto(1L, "saber66");
+        UserDto userDto = new UserDto( "saber66");
         long attemptId = 5L;
         ChallengeAttemptDto attemptDto = new ChallengeAttemptDto(50, 70, "saber66", 3500);
-        ChallengeAttempt expectedResponse = new ChallengeAttempt(attemptId, userDto, 50, 70, 3500, true);
+        ChallengeDto challengeDto = new ChallengeDto(50,70);
+        ChallengeAttempt expectedResponse = new ChallengeAttempt(attemptId, userDto, challengeDto, 3500, true);
 
         try {
             BDDMockito.given(challengeService.verifyAttempt(attemptDto)).willReturn(expectedResponse);

@@ -7,12 +7,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "users")
 public class UserDto {
-   private Long id;
-   private String alias;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "alias", length = 60)
+    private String alias;
+
+    public UserDto(String alias) {
+        this.alias = alias;
+    }
+
+    public UserDto(Long id, String alias) {
+        this.id = id;
+        this.alias = alias;
+    }
 
     @Override
     public String toString() {
